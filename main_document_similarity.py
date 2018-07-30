@@ -4,26 +4,21 @@ import document_reading
 
 file_name = vectorization.vector_file_name
 dictionary = document_reading.load(file_name, 'vectorized_text')
+tickets_to_treat = 10
 if __name__ == "__main__":
     a = 0
-    results = dict()
+    results = []
     keys = document_reading.load("samples", "others")
-    similarity = list()
-    text_target = list()
-    text_closest = list()
-    print("Beginning testing")
+    print("Beginning testing of {} tickets".format(tickets_to_treat))
     for key in keys:
         max_similarity, target_key, closest_key = document_similarity.find_closest(key, dictionary)
-        results[target_key] = {
-                                "target_text": dictionary[target_key]['text'],
-                                "closest_text": dictionary[closest_key]['text'],
-                                "similarity": max_similarity,
-        }
+        result = {"ticket_a": target_key,
+                  "ticket_b": closest_key,
+                  "similarity": max_similarity,
+                  }
+        results.append(result)
         a += 1
-        text_target.append(results[target_key]["target_text"])
-        text_closest.append(results[target_key]["closest_text"])
-        similarity.append(similarity)
-        if a > 200:
+        if a >= tickets_to_treat:
             break
-
-    document_reading.save("results_"+file_name, results, 'results')
+    print("Finished testing of {} tickets".format(a))
+    document_reading.save("experience", results, 'results')

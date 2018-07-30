@@ -26,7 +26,9 @@ def find_closest(target_key, dictionary):
             key_of_closest_ticket = ticket_number
         number_of_tickets_explored += 1
     time_end = time.time()
+    print("Target ticket :")
     print(dictionary[target_key]['text'])
+    print("Closest ticket :")
     print(dictionary[key_of_closest_ticket]['text'])
     print("Calculated closest in {0:.0f} seconds, explored {1} tickets, reached {2:.2} of similarity \n".format(
         time_end - time_begin,

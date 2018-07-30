@@ -2,7 +2,7 @@ from document_reading import save, load
 import tqdm
 import re
 
-csv_pickle_name = 'small_pickle'
+csv_pickle_name = 'csv_file_as_pickle'
 
 
 def cut_line(line):
@@ -24,7 +24,8 @@ def remove_tail(text):
     no_spam = no_cordialement.split('-- This message has been checked')[0]
     no_device = no_spam.split('Device')[0]
     no_info = no_device.split('**')[0]
-    return no_info
+    no_confidential = no_info.split("CONFIDENTIEL")[0]
+    return no_confidential
 
 
 def open_csv(filepath):
@@ -56,8 +57,8 @@ def open_csv(filepath):
             }
         else:
             number_of_empty_body += 1
-        if nb > 100:
-            break
+        # if nb > 100:
+        #     break
     print("The CSV {} was processed, there was {} lines with an empty body".format(filepath, number_of_empty_body))
     return file_dictionary
 
