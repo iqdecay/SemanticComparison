@@ -1,10 +1,10 @@
-import document_reading
+import document_io
 import manage_model
 from main_text_treatment import save_name
 
-model_name = save_name + '_with_250_features'
+model_name = save_name + '_model'
 if __name__ == "__main__":
-    file_with_text_treated = document_reading.load(save_name, 'text_processed')
+    file_with_text_treated = document_io.load(save_name, 'text_processed')
     text_corpus = []
     for unique_id, ticket in file_with_text_treated.items():
         treated_text = ticket['subject'] + ticket['body']

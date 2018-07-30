@@ -1,6 +1,6 @@
 import gensim.models
 from numpy import add, array
-from document_reading import save
+from document_io import save
 import tqdm
 from numpy.linalg import norm
 
@@ -35,10 +35,7 @@ def sentence_to_vect(sentence, w2v_model):
 
 def build_sentence(subject, body):
     """Return the concatenation of the tokenized subject and body, with subject twice as important"""
-    try:
-        return subject + body
-    except ValueError:
-        return subject + body
+    return body
 
 
 def transform_ticket(ticket, model):
@@ -60,7 +57,6 @@ def save_to_memory(key_list, value_list, filename, w2v_model):
     :param w2v_model: the w2v model that contains the word vectors, already trained
     :return: None
     """
-    print("function called with parameter {}".format(filename))
     object_to_save = dict()
     object_length = len(key_list)
     number_of_null_vectors = 0

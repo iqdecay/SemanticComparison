@@ -1,8 +1,13 @@
-from document_reading import save, load
+from document_io import save, load
 import tqdm
 import re
 
-csv_pickle_name = 'csv_file_as_pickle'
+# csv_pickle_name = 'csv_file_as_pickle_with_useful_subjects'
+csv_pickle_name = 'small_pickle'
+
+
+def contains(string, sub_string):
+    return string.lower().find(sub_string) != -1
 
 
 def cut_line(line):
@@ -37,7 +42,7 @@ def open_csv(filepath):
     """
     nb = 0
     file_dictionary = dict()
-    csv_file = open(filepath, encoding='ISO-8859-1')
+    csv_file = open(filepath, encoding="ISO-8859-1")
     number_of_empty_body = 0
     pattern = re.compile(r'\s\s+')
     for line_ in tqdm.tqdm(csv_file):
@@ -47,7 +52,9 @@ def open_csv(filepath):
         line.replace("-", " ")  # To avoid seeing composed words being treated as useless
         line = remove_tail(line)  # The tail contains irrelevant information
         unique_id, subject, body = cut_line(line)
-        as_text = subject + '\n\n ' + body
+        as_text = subject + "\n\n " + body
+        if contains(subject, "re:") or contains(subject, "device") or contains(subject, "down"):
+            body = ''
         body = re.sub('\\n', '', body)  # Use regex to remove newline characters
         if body != '':
             file_dictionary[unique_id] = {
@@ -57,7 +64,7 @@ def open_csv(filepath):
             }
         else:
             number_of_empty_body += 1
-        # if nb > 100:
+        # if nb > 1300:
         #     break
     print("The CSV {} was processed, there was {} lines with an empty body".format(filepath, number_of_empty_body))
     return file_dictionary

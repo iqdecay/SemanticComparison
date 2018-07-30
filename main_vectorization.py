@@ -1,12 +1,12 @@
-# coding:
-import main_model
+import main_text_treatment
 import text_2_vec
-import document_reading
+import document_io
+import main_model
 
-vector_file_name = main_model.model_name + '_vectorized'
+vector_file_name = main_text_treatment.save_name + '_vectorized_without_subject'
 if __name__ == "__main__":
     model = text_2_vec.load_model(main_model.model_name)
-    file = document_reading.load(main_model.save_name, "text_processed")
+    file = document_io.load(main_model.save_name, "text_processed")
     for string in []:
         file.pop(string)
     key_list = []

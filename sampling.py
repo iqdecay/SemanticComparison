@@ -4,8 +4,8 @@ import document_io
 import csv_to_pickle
 
 
-save_name = "save_03"
-path_name = "text_processed"
+save_name = "samples_01"
+path_name = "others"
 if __name__ == "__main__":
     csv_pickle_name = csv_to_pickle.csv_pickle_name
     if not os.path.exists("obj/{}.pkl".format(csv_pickle_name)):
@@ -19,6 +19,8 @@ if __name__ == "__main__":
     # remove_stopwords = True  # Remove stopwords based on a list
     number_of_lines = 1000000
     file_with_text_treated = document_io.treat_text(csv_file_under_dict_form, number_of_lines)
+
+
 
     # Create the text corpus
 

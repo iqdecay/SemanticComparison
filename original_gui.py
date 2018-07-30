@@ -1,9 +1,9 @@
 from tkinter import *
 from functools import partial
 
-import document_reading
+import document_io
 
-a = document_reading.load('small_pickle', '')
+a = document_io.load('small_pickle', '')
 key_list = list(a.keys())
 ticket_example = key_list[0]
 ticket_compared = key_list[18]

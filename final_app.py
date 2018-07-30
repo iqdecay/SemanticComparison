@@ -2,7 +2,8 @@ import tkinter as tk
 from tkinter.constants import *
 from functools import partial  # Used instead of lambda functions in the buttons
 
-import document_reading
+import document_io
+from main_document_similarity import experience_name
 
 # We prepare the experiment
 # The experience set is a list of dictionary. Each dictionary is under the form
@@ -10,9 +11,9 @@ import document_reading
 #     'ticket_b': ticket_id,
 #       'similarity': similarity }
 # and possibly another field : 'user_rating', if the test has already been ran but is ran one more time
-experience_list = document_reading.load("experience", "experience")  # Loading the prepared experience set
+experience_list = document_io.load(experience_name, "experience")  # Loading the prepared experience set
 number_tickets = len(experience_list)
-tickets_dict = document_reading.load("csv_file_as_pickle", "")
+tickets_dict = document_io.load("csv_file_as_pickle", "")
 
 
 class MyApp:
@@ -30,7 +31,7 @@ class MyApp:
         if self.current_ticket_couple == self.number_of_tickets:
             for result in self.results:
                 print(result)
-            document_reading.save("user_results", self.results, "results")
+            document_io.save("user_results", self.results, "results")
 
             self.parent.destroy()
             return None
@@ -41,6 +42,9 @@ class MyApp:
         self.similarity = current_experience['similarity']
         self.text_a = self.tickets[self.ticket_a]["text"]
         self.text_b = self.tickets[self.ticket_b]["text"]
+        self.update_text()
+
+    def update_text(self):
         self.text_top.configure(state='normal')
         self.text_top.delete(1.0, END)
         self.text_top.insert(INSERT, self.text_a)
@@ -65,13 +69,13 @@ class MyApp:
         self.parent.rowconfigure(1, weight=1)  # We add an empty row for design purposes
         self.parent.rowconfigure(2, weight=1)
         self.text_top = tk.Text(self.parent, wrap=WORD)  # The wrap=WORD option avoids newline in the middle of words
-        self.text_top.grid(row=0, column=0, columnspan=10, sticky=N + S + E + W)
-        button_values = [(str(i), i) for i in range(10)]
+        self.text_top.grid(row=0, column=0, columnspan=11, sticky=N + S + E + W)
+        button_values = [(str(i), i) for i in range(11)]
         for text, integer in button_values:
             b = tk.Button(self.parent, text=text, command=partial(self.validate, integer))
             self.parent.columnconfigure(integer, weight=1)
             b.grid(row=2, column=integer, columnspan=1, sticky=N + S + W + E)
-        self.validate(0)
+        self.validate(None)
 
 
 root = tk.Tk()

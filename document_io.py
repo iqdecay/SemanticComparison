@@ -3,7 +3,6 @@ import pickle
 import tqdm
 import os
 from text_processing import text_processing
-from tweaking import banned_ids
 from lemmatize import define_tagger
 
 
@@ -40,31 +39,3 @@ def save(name, content, path):
         with open("obj/{}/{}.pkl".format(path, name), 'wb') as f:
             pickle.dump(content, f, -1)
         print("Object saved successfully under obj/{}/{}.pkl".format(path, name))
-
-
-def treat_text(file, number_of_texts):
-    """
-    Open the object "csv_file_as_pickle" and extract a text corpus from it
-    :param file: the dictionary which content is modified
-    :param number_of_texts: the number of texts that will be processed, can be limited for testing purposes
-    :return: a corpus of text, that is the dictionary "csv_file_as_pickle" with the fields "subject" and
-    "body" now containing the tokenized and treated version of their former content
-    """
-    print("Beginning the text treatment of the file \n")
-    text_treated = 0
-    dict_with_treated_text = dict()
-    tree_tagger = define_tagger()
-    for unique_id, ticket in tqdm.tqdm(file.items()):
-        if unique_id not in banned_ids:
-            dict_with_treated_text[unique_id] = dict(ticket)
-            body = ticket['body']
-            subject = ticket['subject']
-            new_body = text_processing(body, tree_tagger)
-            new_subject = text_processing(subject, tree_tagger)
-            dict_with_treated_text[unique_id]['body'] = new_body
-            dict_with_treated_text[unique_id]['subject'] = new_subject
-            text_treated += 1
-        if text_treated > number_of_texts:
-            break
-    print("\n Text treatment finished")
-    return dict_with_treated_text
