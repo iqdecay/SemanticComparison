@@ -11,11 +11,7 @@ text_example = a[ticket_example]["text"]
 text_compared = a[ticket_compared]["text"]
 
 
-def validate(i):
-    print(i)
-
-
-class MyApp():
+class MyApp:
     def __init__(self, parent):
         self.main_container = Frame(parent, background='bisque')
         self.main_container.pack(side=TOP, fill=BOTH, expand=True)
@@ -37,6 +33,7 @@ class MyApp():
         self.text_top.configure(state='disabled')
         self.text_top.pack(fill='x', side=TOP)
         self.button_top.pack()
+
         #
         # self.text_bottom = Text(self.bottom_right, wrap=WORD)
         # self.text_bottom.insert(INSERT, text_example)
@@ -44,10 +41,19 @@ class MyApp():
         # self.text_bottom.configure(state='disabled')
         # self.text_bottom.pack(fill='x', side=TOP)
 
+        def validate(i):
+            print(i)
+
         button_values = [(str(i), i) for i in range(10)]
         for text, integer in button_values:
             b = Button(self.bottom_frame, text=text, command=partial(validate, integer))
-            b.grid(row=0, column=integer, sticky=N+S+W+E)
+            b.grid(row=0, column=integer, sticky=N + S + W + E)
+
+
+class Comparison:
+    def __init__(self, couple_list, marks):
+        self.couple_list = couple_list  # The list of couples of text that will be compared
+        self.marks = marks  # The list of similarity marks of the couples of text
 
 
 root = Tk()

@@ -23,13 +23,7 @@ if __name__ == "__main__":
         text_target.append(results[target_key]["target_text"])
         text_closest.append(results[target_key]["closest_text"])
         similarity.append(similarity)
-        if a > 10:
+        if a > 200:
             break
 
     document_reading.save("results_"+file_name, results, 'results')
-    with open('data.csv', 'w') as f:
-        for i in range(len(text_closest)):
-            line = text_target[i] + ';' + text_closest[i] + ';' + str(similarity[i])
-            f.write(line)
-    print("Saved under CSV form")
-
