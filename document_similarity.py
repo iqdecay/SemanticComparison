@@ -9,7 +9,10 @@ def text_distance(vector_1, vector_2):
 
 def find_closest(target_key, dictionary):
     """Find the ticket that has the highest similarity to the ticket in input"""
-    target_ticket = dictionary[target_key]
+    try:
+        target_ticket = dictionary[target_key]
+    except KeyError:
+        return None, None, None, True
     target_vector = target_ticket['vector']
     max_similarity = -1
     number_of_tickets_explored = 0
@@ -21,4 +24,4 @@ def find_closest(target_key, dictionary):
             max_similarity = similarity
             key_of_closest_ticket = ticket_number
         number_of_tickets_explored += 1
-    return max_similarity, target_key, key_of_closest_ticket
+    return max_similarity, target_key, key_of_closest_ticket, False
