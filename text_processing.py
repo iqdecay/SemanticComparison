@@ -25,7 +25,7 @@ def clean_characters(text):
 
 
 def tokenize_text(text):
-    """tokenize the text into words and return a list of token."""
+    """Tokenize the text into words and return a list of string (=token)"""
     tokenizer = nltk.RegexpTokenizer(r'\w+')
     tokenized_text = tokenizer.tokenize(text)
     return tokenized_text
@@ -44,7 +44,7 @@ def text_processing(text):
     Take the input text, in string form, clean its characters, then tokenize it, then remove useless words,
     and words that are too long or too short and return it
     :param text: in string format
-    :return: final_text under tokenized form, so a list of strings
+    :return: final_text, list of strings (=tokenized)
     """
     replacement = tweaking.replacement
     new_text = str(text)
@@ -64,18 +64,17 @@ def text_processing(text):
     return final_text
 
 
-def treat_text(file, number_of_texts):
+def treat_text(ticket_dictionary, number_of_texts):
     """
-    Open the object "csv_file_as_pickle" and extract a text corpus from it
-    :param file: the dictionary which content is modified
+    Open the "ticket_dictionary" and extract a text corpus from it
+    :param ticket_dictionary: the dictionary which content is modified
     :param number_of_texts: the number of texts that will be processed, can be limited for testing purposes
-    :return: a corpus of text, that is the dictionary "csv_file_as_pickle" with the fields "subject" and
-    "body" now containing the tokenized and treated version of their former content
+    :return: dict_with_treated_text
     """
-    print("Beginning the text treatment of the file \n")
-    text_treated = 0
+    print("Beginning the text treatment of the object \n")
+    text_treated = -1
     dict_with_treated_text = dict()
-    for unique_id, ticket in tqdm.tqdm(file.items()):
+    for unique_id, ticket in tqdm.tqdm(ticket_dictionary.items()):
         dict_with_treated_text[unique_id] = dict(ticket)
         body = ticket['body']
         subject = ticket['subject']

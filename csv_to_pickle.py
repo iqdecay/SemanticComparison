@@ -6,12 +6,12 @@ csv_pickle_name = 'csv_file_as_pickle'
 
 
 def contains(string, sub_string):
-    """Return True if sub_string is found in string"""
+    """Return True if sub_string is found in string even in capitalized form"""
     return string.lower().find(sub_string) != -1
 
 
 def cut_line(line):
-    """Take a csv line and separate it into unique_id, subject and body, that are strings"""
+    """Take a csv line and separate it into 3 strings : unique_id, subject and body"""
     separator_index = line.find(";")  # The file is under the form: unique_id; subject; body;;;;;
     unique_id = line[:separator_index]  # The many ; at the end make it impractical to use the .split function
     line = line[separator_index + 1:]
@@ -38,7 +38,7 @@ def open_csv(filepath):
     Open a csv file that uses ; as separators, and return a dictionary of dictionaries
     The text does not undergo cleaning, the "tail" of the body is simply removed.
     As the CSV file is supposed to be processed only once, all the lines are treated.
-    The text is stored under string form.
+    The text is stored under string form in the field "text"
     """
     nb = 0
     file_dictionary = dict()
@@ -53,10 +53,11 @@ def open_csv(filepath):
         unique_id, subject, body = cut_line(line)
         as_text = subject + "\n\n " + body
         as_text.replace("-", "\-")  # We add newline to make reading easier for "lists"
+        # We want to avoid counting tickets that have subject showing they do not have interesting content
         if contains(subject, "re:") or contains(subject, "device") or contains(subject, "down"):
             body = ''
         body = re.sub('\\n', '', body)  # Use regex to remove newline characters
-        if body != '':
+        if body != '':  # We don't take empty tickets
             file_dictionary[unique_id] = {
                 "text": str(as_text),
                 "body": body,

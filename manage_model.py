@@ -21,6 +21,12 @@ def create_model(text_corpus, n_features=100, window_size=100, min_word_count=10
 
 
 def save_model(model, model_save_name):
-    """Save the provided model under the provided name"""
+    """
+    Save the model
+    :param model: the model to be saved
+    :param model_save_name: the name under which the model will be saved
+    :return: None
+    """
     model.save(model_save_name)
     print('Model saved under name : {}'.format(model_save_name))
+    return None
