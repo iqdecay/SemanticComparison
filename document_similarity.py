@@ -1,5 +1,5 @@
 def text_distance(vector_1, vector_2):
-    """Compute the text similarity of vector_1 and vector_2, that are normalized word vectors"""
+    """Compute the text similarity of vector_1 and vector_2, that are normalized vectors"""
     dot_product = 0
     for i in range(len(vector_1)):
         a_i_b_i = vector_1[i] * vector_2[i]
