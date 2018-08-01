@@ -1,6 +1,3 @@
-import time
-
-
 def text_distance(vector_1, vector_2):
     """Compute the text similarity of vector_1 and vector_2, that are normalized vectors"""
     dot_product = 0
@@ -12,7 +9,6 @@ def text_distance(vector_1, vector_2):
 
 def find_closest(target_key, dictionary):
     """Find the ticket that has the highest similarity to the ticket in input"""
-    time_begin = time.time()
     target_ticket = dictionary[target_key]
     target_vector = target_ticket['vector']
     max_similarity = -1
@@ -25,15 +21,4 @@ def find_closest(target_key, dictionary):
             max_similarity = similarity
             key_of_closest_ticket = ticket_number
         number_of_tickets_explored += 1
-    time_end = time.time()
-    print("Target ticket :")
-    print(dictionary[target_key]['text'])
-    print("Closest ticket :")
-    print(dictionary[key_of_closest_ticket]['text'])
-    print("Calculated closest in {0:.0f} seconds, explored {1} tickets, reached {2:.2} of similarity \n".format(
-        time_end - time_begin,
-        number_of_tickets_explored,
-        max_similarity))
     return max_similarity, target_key, key_of_closest_ticket
-    # print(dictionary[target_key]['subject'], ':', dictionary[target_key]['body'])
-    # print(dictionary[key_of_closest_ticket]['subject'], ':', dictionary[key_of_closest_ticket]['body'])

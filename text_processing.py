@@ -1,6 +1,7 @@
 import string  # To remove punctuation from texts
 
 import nltk
+import tqdm
 
 import tweaking
 
@@ -38,29 +39,26 @@ def is_long(word):
     return len(word) > 15
 
 
-def text_processing(text, clean=True, lemmatize=False, tokenize=True, remove_length=True,
-                    remove_stopwords=True):
+def text_processing(text):
+    """
+    Take the input text, in string form, clean its characters, then tokenize it, then remove useless words,
+    and words that are too long or too short and return it
+    :param text: in string format
+    :return: final_text under tokenized form, so a list of strings
+    """
     replacement = tweaking.replacement
     new_text = str(text)
-    if clean:
-        new_text = clean_characters(new_text)
-    if tokenize:
-        new_text = tokenize_text(new_text)
-    elif lemmatize:
-        print("This feature will be added later")
-    else:
-        raise TypeError('Either Lemmatize or Tokenize has to be True')
+    text_cleaned = clean_characters(new_text)
+    text_tokenized = tokenize_text(text_cleaned)
     final_text = []
-    for word in new_text:
+    for word in text_tokenized:
         candidate = word
         if candidate in replacement:
             candidate = replacement[candidate]
-        if remove_length:
-            if is_long(word) or is_short(word):
-                candidate = ''
-        if remove_stopwords:
-            if is_stopword(word):
-                candidate = ''
+        if is_long(word) or is_short(word):
+            candidate = ''
+        if is_stopword(word):
+            candidate = ''
         if candidate != '':
             final_text.append(candidate)
     return final_text

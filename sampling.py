@@ -2,6 +2,7 @@ import os
 
 import document_io
 import csv_to_pickle
+import text_processing
 
 
 save_name = "samples_01"
@@ -18,7 +19,7 @@ if __name__ == "__main__":
     # remove_length = True  # Remove words that are too long or too short
     # remove_stopwords = True  # Remove stopwords based on a list
     number_of_lines = 1000000
-    file_with_text_treated = document_io.treat_text(csv_file_under_dict_form, number_of_lines)
+    file_with_text_treated = text_processing.treat_text(csv_file_under_dict_form, number_of_lines)
 
 
 

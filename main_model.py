@@ -2,7 +2,7 @@ import document_io
 import manage_model
 from main_text_treatment import save_name
 
-model_name = save_name + '_model'
+model_name = save_name + '_model_250'
 if __name__ == "__main__":
     file_with_text_treated = document_io.load(save_name, 'text_processed')
     text_corpus = []
@@ -19,7 +19,7 @@ if __name__ == "__main__":
                                       window_size=window_size,
                                       min_word_count=word_count_min
                                       )
-    manage_model.save_model(model, model_name)
+    manage_model.save_model(model, "obj/models/{}".format(model_name))
     words_with_their_count = list()
     for key, word_object in model.wv.vocab.items():
         words_with_their_count.append((word_object.count, key))

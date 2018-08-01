@@ -4,14 +4,13 @@ from functools import partial  # Used instead of lambda functions in the buttons
 
 import document_io
 from main_document_similarity import experience_name
-
 # We prepare the experiment
 # The experience set is a list of dictionary. Each dictionary is under the form
 #  { 'ticket_a': ticket_id,
 #     'ticket_b': ticket_id,
 #       'similarity': similarity }
 # and possibly another field : 'user_rating', if the test has already been ran but is ran one more time
-experience_list = document_io.load(experience_name, "experience")  # Loading the prepared experience set
+experience_list = document_io.load("handpicked", "others")  # Loading the prepared experience set
 number_tickets = len(experience_list)
 tickets_dict = document_io.load("csv_file_as_pickle", "")
 
@@ -31,7 +30,7 @@ class MyApp:
         if self.current_ticket_couple == self.number_of_tickets:
             for result in self.results:
                 print(result)
-            document_io.save("user_results", self.results, "results")
+            document_io.save("user_results", self.results, "results", overwrite=True)
 
             self.parent.destroy()
             return None

@@ -2,11 +2,11 @@ from document_io import save, load
 import tqdm
 import re
 
-# csv_pickle_name = 'csv_file_as_pickle_with_useful_subjects'
-csv_pickle_name = 'small_pickle'
+csv_pickle_name = 'csv_file_as_pickle'
 
 
 def contains(string, sub_string):
+    """Return True if sub_string is found in string"""
     return string.lower().find(sub_string) != -1
 
 
@@ -49,10 +49,10 @@ def open_csv(filepath):
         nb += 1
         line = str(line_)
         line = re.sub(pattern, ' ', line)  # Use regex to remove multiple space
-        line.replace("-", " ")  # To avoid seeing composed words being treated as useless
         line = remove_tail(line)  # The tail contains irrelevant information
         unique_id, subject, body = cut_line(line)
         as_text = subject + "\n\n " + body
+        as_text.replace("-", "\-")  # We add newline to make reading easier for "lists"
         if contains(subject, "re:") or contains(subject, "device") or contains(subject, "down"):
             body = ''
         body = re.sub('\\n', '', body)  # Use regex to remove newline characters
@@ -64,15 +64,13 @@ def open_csv(filepath):
             }
         else:
             number_of_empty_body += 1
-        # if nb > 1300:
-        #     break
     print("The CSV {} was processed, there was {} lines with an empty body".format(filepath, number_of_empty_body))
     return file_dictionary
 
 
 def save_csv_as_pickle(file_dict, filename):
     """Save the dictionary under pickle form"""
-    save(filename, file_dict, '')
+    save(filename, file_dict, '', overwrite=True)
 
 
 if __name__ == '__main__':

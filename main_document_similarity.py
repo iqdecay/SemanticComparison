@@ -1,19 +1,21 @@
 import shutil
+import tqdm
 
 import main_vectorization as vectorization
 import document_similarity
 import document_io
 
 file_name = vectorization.vector_file_name
-dictionary = document_io.load(file_name, 'vectorized_text')
-tickets_to_treat = 1000
-experience_name = "expe_03"
+number_of_features = 1000
+dictionary = document_io.load("save_04_vectorized_{}".format(number_of_features), 'vectorized_text')
+tickets_to_treat = 3000
+experience_name = "big_results"
 if __name__ == "__main__":
     a = 0
     results = []
-    keys = document_io.load("samples", "others")
+    keys = document_io.load("3000_tickets", "others")
     print("Beginning testing of {} tickets".format(tickets_to_treat))
-    for key in keys:
+    for key in tqdm.tqdm(keys):
         max_similarity, target_key, closest_key = document_similarity.find_closest(key, dictionary)
         result = {"ticket_a": target_key,
                   "ticket_b": closest_key,

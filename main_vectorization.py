@@ -3,9 +3,10 @@ import text_2_vec
 import document_io
 import main_model
 
-vector_file_name = main_text_treatment.save_name + '_vectorized_without_subject'
+save_name = main_text_treatment.save_name
+vector_file_name = save_name + '_vectorized_1000'
 if __name__ == "__main__":
-    model = text_2_vec.load_model(main_model.model_name)
+    model = text_2_vec.load_model('obj/models/{}'.format(save_name+'_model_1000'))
     file = document_io.load(main_model.save_name, "text_processed")
     for string in []:
         file.pop(string)

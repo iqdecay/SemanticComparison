@@ -65,10 +65,9 @@ def save_to_memory(key_list, value_list, filename, w2v_model):
     for i in tqdm.tqdm(range(object_length)):
         value = value_list[i]
         new_ticket, has_null_vector = transform_ticket(value, w2v_model)
-        if not has_null_vector:
-            object_to_save[key_list[i]] = new_ticket
-        else:
+        if has_null_vector:
             number_of_null_vectors += 1
+        object_to_save[key_list[i]] = new_ticket
     print("There was {} null vectors".format(number_of_null_vectors))
     save(filename, object_to_save, "vectorized_text")
     return None
