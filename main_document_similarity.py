@@ -6,14 +6,15 @@ import document_similarity
 import document_io
 
 file_name = vectorization.vector_file_name
-number_of_features = 1000
+number_of_features = 250
 dictionary = document_io.load("save_04_vectorized_{}".format(number_of_features), 'vectorized_text')
-tickets_to_treat = 3000
-experience_name = "big_results"
+tickets_to_treat = 310
+experience_name = "aggregate_matched"
 if __name__ == "__main__":
+    print(experience_name)
     a = 0
     results = []
-    keys = document_io.load("3000_tickets", "others")
+    keys = document_io.load("aggregate", "others")
     print("Beginning testing of {} tickets".format(tickets_to_treat))
     for key in tqdm.tqdm(keys):
         max_similarity, target_key, closest_key = document_similarity.find_closest(key, dictionary)

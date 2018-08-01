@@ -8,7 +8,7 @@ def load(name, path):
     print("Loading the object contained in obj/{}/{}.pkl ".format(path, name))
     try:
         with open("obj/{}/{}.pkl".format(path, name), 'rb') as f:
-            print("Object contained in obj/{}/{}.pkl sucessfully loaded".format(path, name))
+            print("Done")
             return pickle.load(f)
     except FileNotFoundError:
         raise FileNotFoundError('No such file exists')
