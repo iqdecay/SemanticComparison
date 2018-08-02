@@ -12,7 +12,7 @@ experience_name = "handpicked_50"
 if __name__ == "__main__":
     print(experience_name)
     results = []
-    keys = document_io.load("handpicked", "others")
+    keys = document_io.load("aggregate", "others")
     tickets_to_treat = len(keys)
     print("Beginning testing of {} tickets".format(tickets_to_treat))
     for key in tqdm.tqdm(keys):

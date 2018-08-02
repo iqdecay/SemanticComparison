@@ -26,3 +26,22 @@ def find_closest(target_key, dictionary):
             key_of_closest_ticket = ticket_number
         number_of_tickets_explored += 1
     return max_similarity, target_key, key_of_closest_ticket, False
+
+
+def find_closest_wmd(target_key, dictionary, model):
+    try:
+        target_ticket = dictionary[target_key]['body']
+    except KeyError:
+        print(target_key)
+        return None, None, None, True
+    min_difference = 1000
+    number_of_tickets_explored = 0
+    key_of_closest_ticket = target_key
+    for ticket_number in dictionary.keys():
+        current_ticket = dictionary[ticket_number]['body']
+        difference = model.mwdistance(target_ticket, current_ticket)
+        if difference <= min_difference and ticket_number != target_key:
+            min_difference = difference
+            key_of_closest_ticket = ticket_number
+        number_of_tickets_explored += 1
+    return min_difference, target_key, key_of_closest_ticket, False
