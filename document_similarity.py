@@ -12,6 +12,7 @@ def find_closest(target_key, dictionary):
     try:
         target_ticket = dictionary[target_key]
     except KeyError:
+        print(target_key)
         return None, None, None, True
     target_vector = target_ticket['vector']
     max_similarity = -1

@@ -5,8 +5,8 @@ import os
 
 def load(name, path):
     """Load an object stored in name.pkl pickle file in the obj folder"""
-    print("Loading the object contained in obj/{}/{}.pkl ".format(path, name))
     try:
+        print("Loading the object contained in obj/{}/{}.pkl ".format(path, name))
         with open("obj/{}/{}.pkl".format(path, name), 'rb') as f:
             print("Done")
             return pickle.load(f)
