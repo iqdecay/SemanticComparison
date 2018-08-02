@@ -2,15 +2,15 @@ import document_io
 import manage_model
 from main_text_treatment import save_name
 
-model_name = save_name + '_model_250'
+model_name = save_name + '_model_50_no_subject'
 if __name__ == "__main__":
     file_with_text_treated = document_io.load(save_name, 'text_processed')
     text_corpus = []
     for unique_id, ticket in file_with_text_treated.items():
-        treated_text = ticket['subject'] + ticket['body']
+        treated_text = ticket['body']
         if treated_text != list():
             text_corpus.append(treated_text)
-    number_of_features = 250
+    number_of_features = 50
     window_size = 5
     sample = 0.001
     word_count_min = 2
