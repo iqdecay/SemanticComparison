@@ -1,3 +1,5 @@
+# This app is used to select tickets that would be suitable to be sent to client relations employees (thanks to the
+# final_app.
 import tkinter as tk
 from tkinter.constants import *
 from functools import partial  # Used instead of lambda functions in the buttons
