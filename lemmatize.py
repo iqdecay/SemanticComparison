@@ -1,3 +1,4 @@
+# Deprecated : not used anywhere, but an interesting idea nonetheless, search "lemmatization" for more info
 from treetaggerwrapper import TreeTagger
 
 

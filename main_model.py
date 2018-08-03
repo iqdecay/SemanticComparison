@@ -1,3 +1,4 @@
+# Create a Word2Vec model based off the treated tickets, assembled into a corpus
 import document_io
 import manage_model
 from main_text_treatment import save_name

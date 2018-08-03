@@ -1,3 +1,4 @@
+# Regroups all the function used to process the text in order to make it more "computer-friendly"
 import string  # To remove punctuation from texts
 
 import nltk

@@ -1,6 +1,10 @@
-from document_io import save, load
-import tqdm
+# Take a CSV file containing Xelya support tickets and save it into a dictionary that Python can interpret
+
 import re
+
+import tqdm
+
+import document_io
 
 csv_pickle_name = 'csv_file_as_pickle'
 
@@ -23,7 +27,10 @@ def cut_line(line):
 
 
 def remove_tail(text):
-    """Remove the tail of the text containing useless information and return it"""
+    """Remove the tail of the text containing useless information and return it. The keywords are empirically chosen
+    from what I observed at the end of tickets. A better approach would need to detect "personal" signatures and
+    remove it. For instance lawyers have very long signatures about confidentiality that I haven't been able
+    to automatically identify"""
     no_referrer = text.split('***')[0]
     no_cordialement = no_referrer.split('cordialement')[0]
     no_spam = no_cordialement.split('-- This message has been checked')[0]
@@ -54,7 +61,7 @@ def open_csv(filepath):
         as_text = subject + "\n\n " + body
         as_text.replace("-", "\-")  # We add newline to make reading easier for "lists"
         if contains(subject, "re:") or contains(subject, "device") or contains(subject, "down"):
-            body = ''
+            body = ''  # Tickets that have these words in their subjects are deemed useless
         body = re.sub('\\n', '', body)  # Use regex to remove newline characters
         if body != '':
             file_dictionary[unique_id] = {
@@ -70,7 +77,7 @@ def open_csv(filepath):
 
 def save_csv_as_pickle(file_dict, filename):
     """Save the dictionary under pickle form"""
-    save(filename, file_dict, '', overwrite=True)
+    document_io.save(filename, file_dict, '', overwrite=True)
 
 
 if __name__ == '__main__':

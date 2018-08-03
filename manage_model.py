@@ -1,3 +1,4 @@
+# Allows creating and saving of a Word2Vec model with tunable parameters
 import gensim.models
 import logging
 

@@ -1,8 +1,7 @@
 import gensim.models
-from numpy import add, array
+import numpy as np
 from document_io import save
 import tqdm
-from numpy.linalg import norm
 
 
 def load_model(model_name):
@@ -15,16 +14,16 @@ def sentence_to_vect(sentence, w2v_model):
     Transform the sentence into a normalized vector by linear addition of its composing word vectors
     :param sentence: tokenized sentence, as word list
     :param w2v_model: word2vec model, already trained
-    :return: the corresponding vector
+    :return: the corresponding vector, and wether or not it is null
     """
     vector_length = len(w2v_model['ximi'])  # We use ximi because we know it's in the model's vocabulary
-    sentence_vector = array([0 for _ in range(vector_length)])
+    sentence_vector = np.array([0 for _ in range(vector_length)])
     for word in sentence:
         try:
-            sentence_vector = add(sentence_vector, array(w2v_model[word]))
+            sentence_vector = np.add(sentence_vector, np.array(w2v_model[word]))
         except KeyError:
-            pass
-    norm_vector = norm(sentence_vector)
+            pass  # It just means the word isn't in the model
+    norm_vector = np.linalg.norm(sentence_vector)
     if norm_vector != 0:
         sentence_vector = sentence_vector / norm_vector
         has_null_vector = False
@@ -33,16 +32,10 @@ def sentence_to_vect(sentence, w2v_model):
     return sentence_vector, has_null_vector
 
 
-def build_sentence(subject, body):
-    """Return the concatenation of the tokenized subject and body, with subject twice as important"""
-    return body
-
-
 def transform_ticket(ticket, model):
     """"Transform the ticket into a vector, add the vector to the ticket and return the ticket"""
     body = ticket['body']
-    subject = ticket['subject']
-    sentence = build_sentence(subject, body)
+    sentence = list(body)  # One will notice that at no point is the subject taken into account
     vectorized, has_null_vector = sentence_to_vect(sentence, model)
     ticket['vector'] = vectorized
     return ticket, has_null_vector
@@ -50,7 +43,7 @@ def transform_ticket(ticket, model):
 
 def save_to_memory(key_list, value_list, filename, w2v_model):
     """
-    Save the data in dict format using pickle.dump method
+    Compute tickets' sentence vectors and save it
     :param key_list: list of the keys of the dictionnary
     :param value_list: list of the values of the dictionnary
     :param filename: name of the pickle file it will be saved under (given without the .pkl extension)

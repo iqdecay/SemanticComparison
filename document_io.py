@@ -4,7 +4,12 @@ import os
 
 
 def load(name, path):
-    """Load an object stored in name.pkl pickle file in the obj folder"""
+    """
+    Load the object
+    :param name: the name under which the object is saved
+    :param path: the subfolder of "obj" in which the object is saved
+    :return: None
+    """
     try:
         print("Loading the object contained in obj/{}/{}.pkl ".format(path, name))
         with open("obj/{}/{}.pkl".format(path, name), 'rb') as f:
@@ -15,7 +20,14 @@ def load(name, path):
 
 
 def save(name, content, path, overwrite=False):
-    """Save object content in name.pkl file in the obj/path folder, and overwrite if the parameter is True"""
+    """
+    Save the object under pickle form
+    :param name: the name under which the object will be saved
+    :param content: the Python object that will be saved
+    :param path: the subfolder of "obj" in which the object will be saved
+    :param overwrite: if True, overwrite the existing file
+    :return: None
+    """
     # If the file exists, we can save the new version under a new name, or not save at all
     if overwrite:
         print("Saving the object under obj/{}/{}.pkl".format(path, name))
