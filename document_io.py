@@ -3,15 +3,17 @@ import pickle
 import os
 
 
-def load(name, path):
+def load(name):
     """
     Load the object
-    :param name: the name under which the object is saved
-    :param path: the subfolder of the cwd in which the object is saved
+    :param name: the complete path relative to the cwd in which the object
+    is saved
     :return: None
     """
     cwd = os.getcwd()
-    complete_path = "{}/{}/{}.pkl".format(cwd, path, name)
+    if name[-4:] == ".pkl":
+        name = name[:-4]
+    complete_path = "{}/{}.pkl".format(cwd, name)
     try:
         print("Loading the object contained in ", complete_path)
         with open(complete_path, 'rb') as f:
