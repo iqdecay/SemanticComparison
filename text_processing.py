@@ -3,6 +3,7 @@ import string  # To remove punctuation from texts
 import nltk
 import tqdm
 
+stopwords = []  # Will be the list of stopwords of the desired language
 global stopwords
 
 
@@ -47,7 +48,7 @@ def text_processing(text, min_len, max_len):
     return final_text
 
 
-def treat_dictionary(dictionary, number_of_texts, min_len=4, max_len=15, lang="english")
+def treat_dictionary(dictionary, number_of_texts, min_len=4, max_len=15, lang="english"):
     """
     Open the dictionary, return a corpus of treated text from it
     :param dictionary: the dictionary which contains the texts
