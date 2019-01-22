@@ -1,5 +1,15 @@
-These files were developped by Victor Nepveu [nepveu.victor@imt-atlantique.net] for Xelya.
+## WIP : I'm currently working on adapting the work made for the company
+## to a more general usage. The README is therefore not entirely up-to-date.
 
+## TODOs :
+
+- [ ] Modify the training corpus
+- [ ] Propagate data structure modification
+- [ ] Improve user-friendliness
+- [ ] Make the programs into at most 5 files
+
+
+These files were developped by Victor Nepveu [nepveu.victor@imt-atlantique.net] for Xelya.
 They implement Word2Vec algorithms, and especially apply it to support tickets, numerous
 at Xelya. The point is, for a given ticket, to find the closest ticket that has already been 
 solved, and send the client the solution used for this ancient ticket, so that the client 
@@ -52,9 +62,3 @@ configuration as to which data the applications should be dealing with. The conf
 in the filename used within the "load" functions
 
 
-## TODOs :
-
-- [ ] Modify the training corpus
-- [ ] Anonymize data
-- [ ] Improve user-friendliness
-- [ ] Remove irrelevant parts

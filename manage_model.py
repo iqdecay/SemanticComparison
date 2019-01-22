@@ -21,7 +21,9 @@ def create_model(text_corpus, n_features=100, window_size=100, min_word_count=10
     return model
 
 
-def save_model(model, model_save_name):
+def save_model(model):
     """Save the provided model under the provided name"""
+    model_save_name = input(
+        "Enter the name under which you want to save the model. Enter nothing for default name : \n")
     model.save(model_save_name)
     print('Model saved under name : {}'.format(model_save_name))

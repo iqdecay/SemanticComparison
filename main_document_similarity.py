@@ -4,7 +4,6 @@
 # that makes the most of the word embedding allowed by Word2Vec
 # More info : "From Word Embeddings To Document Distances", research paper by Kusner & al.
 import tqdm
-
 import main_vectorization as vectorization
 import document_similarity
 import document_io
