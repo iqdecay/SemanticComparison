@@ -3,11 +3,7 @@ import string  # To remove punctuation from texts
 import nltk
 import tqdm
 
-
-
-def is_stopword(word):
-    """Return True if word is a stopword"""
-    return word in tweaking.stop_words
+global stopwords
 
 
 def clean_characters(text):
@@ -37,6 +33,7 @@ def text_processing(text, min_len, max_len):
     :param max_len: the maximum length of a token to be considered a word
     :return: final_text under tokenized form, so a list of strings
     """
+    global stopwords
     new_text = str(text)
     text_cleaned = clean_characters(new_text)
     text_tokenized = tokenize_text(text_cleaned)
@@ -45,23 +42,26 @@ def text_processing(text, min_len, max_len):
         candidate = word
         if len(word) < min_len or len(word) > max_len:
             candidate = ''
-        if is_stopword(word):
+        if word in stopwords:
             candidate = ''
         if candidate != '':
             final_text.append(candidate)
     return final_text
 
 
-def treat_text(dictionary, number_of_texts, min_len=4, max_len=15)
+def treat_text(dictionary, number_of_texts, min_len=4, max_len=15, lang="english")
     """
     Open the dictionary, return a corpus of treated text from it
     :param dictionary: the dictionary which contains the texts
     :param number_of_texts: the number of texts that will be processed, can be limited for testing purposes
     :param min_len: the minimum length of a token to be considered a word
     :param max_len: the maximum length of a token to be considered a word
+    :param lang: the language for stopwords
     :return: a corpus of text, under dictionary form
     """
+    global stopwords
     print("Beginning the text treatment of the file \n")
+    stopwords = list(nltk.corpus.stopwords.words(lang))
     text_treated = 0
     dict_with_treated_text = dict()
     for unique_id, text in tqdm.tqdm(dictionary.items()):
