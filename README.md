@@ -55,6 +55,6 @@ in the filename used within the "load" functions
 ## TODOs :
 
 - [ ] Modify the training corpus
-- [ ] Anonymize data
+- [ ] Propagate data structure modification
 - [ ] Improve user-friendliness
-- [ ] Remove irrelevant parts
+- [ ] Make the programs into at most 5 files
