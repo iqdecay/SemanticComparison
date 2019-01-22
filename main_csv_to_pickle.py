@@ -30,7 +30,7 @@ def save_csv_as_pickle(file_dict, filename):
 
 
 if __name__ == '__main__':
-    filepath = input("enter path to csv file containing text :\n")
+    filepath = input("Enter path to csv file containing text :\n")
     dictionary_file = open_csv(filepath)
-    pickle_name = input("enter name for the pickle object :\n")
+    pickle_name = input("Enter name for the pickle object :\n")
     save_csv_as_pickle(dictionary_file, pickle_name)

@@ -1,4 +1,4 @@
-# Contains various fonctions to compute the semantical distance between two texts
+# Contains various functions to compute the semantical distance between two texts
 
 
 def text_distance(vector_1, vector_2):
