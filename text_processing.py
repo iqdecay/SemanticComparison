@@ -39,17 +39,15 @@ def text_processing(text, min_len, max_len):
     text_tokenized = tokenize_text(text_cleaned)
     final_text = []
     for word in text_tokenized:
-        candidate = word
         if len(word) < min_len or len(word) > max_len:
-            candidate = ''
+            continue
         if word in stopwords:
-            candidate = ''
-        if candidate != '':
-            final_text.append(candidate)
+            continue
+        final_text.append(word)
     return final_text
 
 
-def treat_text(dictionary, number_of_texts, min_len=4, max_len=15, lang="english")
+def treat_dictionary(dictionary, number_of_texts, min_len=4, max_len=15, lang="english")
     """
     Open the dictionary, return a corpus of treated text from it
     :param dictionary: the dictionary which contains the texts
