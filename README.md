@@ -1,4 +1,7 @@
+## WIP : I'm currently working on adapting the work made for the company
+## to a more general usage. The README is therefore not entirely up-to-date.
 These files were developped by Victor Nepveu [nepveu.victor@imt-atlantique.net] for Xelya.
+
 
 They implement Word2Vec algorithms, and especially apply it to support tickets, numerous
 at Xelya. The point is, for a given ticket, to find the closest ticket that has already been 
