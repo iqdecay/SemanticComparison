@@ -35,8 +35,7 @@ def text_processing(text, min_len, max_len):
     :return: final_text under tokenized form, so a list of strings
     """
     global stopwords
-    new_text = str(text)
-    text_cleaned = clean_characters(new_text)
+    text_cleaned = clean_characters(text)
     text_tokenized = tokenize_text(text_cleaned)
     final_text = []
     for word in text_tokenized:
@@ -56,7 +55,7 @@ def treat_dictionary(dictionary, number_of_texts, min_len=4, max_len=15, lang="e
     :param min_len: the minimum length of a token to be considered a word
     :param max_len: the maximum length of a token to be considered a word
     :param lang: the language for stopwords
-    :return: a corpus of text, under dictionary form
+    :return: a corpus of text, under dictionary of list of strings form
     """
     global stopwords
     print("Beginning the text treatment of the file \n")
