@@ -28,9 +28,3 @@ def save_csv_as_pickle(file_dict, filename):
     """Save the dictionary under pickle form"""
     document_io.save(filename, file_dict, '', overwrite=True)
 
-
-if __name__ == '__main__':
-    filepath = input("Enter path to csv file containing text :\n")
-    dictionary_file = open_csv(filepath)
-    pickle_name = input("Enter name for the pickle object :\n")
-    save_csv_as_pickle(dictionary_file, pickle_name)
