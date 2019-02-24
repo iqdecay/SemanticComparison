@@ -3,8 +3,7 @@ import string  # To remove punctuation from texts
 import nltk
 import tqdm
 
-stopwords = []  # Will be the list of stopwords of the desired language
-global stopwords
+stopwords = list(nltk.corpus.stopwords.words(lang))
 
 
 def clean_characters(text):
@@ -59,7 +58,6 @@ def treat_dictionary(dictionary, number_of_texts, min_len=4, max_len=15, lang="e
     """
     global stopwords
     print("Beginning the text treatment of the file \n")
-    stopwords = list(nltk.corpus.stopwords.words(lang))
     text_treated = 0
     dict_with_treated_text = dict()
     for unique_id, text in tqdm.tqdm(dictionary.items()):
