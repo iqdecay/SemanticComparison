@@ -1,6 +1,6 @@
 import csv_to_pickle as csv
 import text_processing, document_io
-import os
+import os, gensim
 
 # TODO : have the program ask for input
 #  The csv file contains texts separate by commas
@@ -42,4 +42,12 @@ if not os.path.exists("{}/{}".format(cwd, treated_dictionary_pickle_name)):
 else:
     print("Treated text was found, not processing it")
     treated_dictionary = document_io.load(treated_dictionary_pickle_name)
+
+
+# Use the pre-trained Google News model
+
+model = gensim.models.Word2Vec.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
+
+# TODO : add possibility to train your own model on a corpus, but specify the type of the corpus
+
 
