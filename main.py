@@ -9,7 +9,7 @@ import text_similarity
 # TODO : have the program ask for input
 cwd = os.getcwd()
 #  The csv file contains texts separated by commas
-csv_filename = "enter filename with .csv"
+csv_filename = "test.csv"
 base_name = "enter pickle name without extension"
 
 if not os.path.exists("{}/{}".format(cwd, csv_filename)):
@@ -39,7 +39,7 @@ treated_dictionary_pickle_name = base_name + "_treated_dict" + ".pkl"
 if not os.path.exists("{}/{}".format(cwd, treated_dictionary_pickle_name)):
     #  Specify the parameters, cf text_processing.py for explanation
     treated_dictionary = text_processing.treat_dictionary(file_dictionary, min_len=1, max_len=15)
-    document_io.save(treated_dictionary_pickle_name, treated_dictionary, cwd)
+    document_io.save(treated_dictionary_pickle_name, treated_dictionary, "")
     print("The text was treated and saved under {}{}".format(cwd, treated_dictionary_pickle_name))
 else:
     print("Treated text was found, not processing it")
@@ -80,7 +80,7 @@ for key, tokenized_sentence in treated_dictionary.items():
     vectorized_texts[key] = vectorized_sentence
 
 # Save the result
-document_io.save(vectorized_text_pickle_name, vectorized_texts, cwd)
+document_io.save(vectorized_text_pickle_name, vectorized_texts, "")
 
 
 def find_closest(target_key):
