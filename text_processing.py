@@ -46,7 +46,7 @@ def text_processing(text, min_len, max_len):
     return final_text
 
 
-def treat_dictionary(dictionary, number_of_texts=10000000, min_len=2, max_len=15, lang="english"):
+def treat_dictionary(dictionary, min_len=2, max_len=15, lang="english"):
     """
     Open the dictionary, return a corpus of treated text from it
     :param dictionary: the dictionary which contains the texts
@@ -58,13 +58,9 @@ def treat_dictionary(dictionary, number_of_texts=10000000, min_len=2, max_len=15
     """
     global stopwords
     print("Beginning the text treatment of the file \n")
-    text_treated = 0
     dict_with_treated_text = dict()
     for unique_id, text in tqdm.tqdm(dictionary.items()):
         new_text = text_processing(text, min_len, max_len)
         dict_with_treated_text[unique_id] = new_text
-        text_treated += 1
-        if text_treated > number_of_texts:
-            break
     print("\n Text treatment finished")
     return dict_with_treated_text
