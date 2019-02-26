@@ -10,7 +10,7 @@ import text_similarity
 cwd = os.getcwd()
 #  The csv file contains texts separated by commas
 csv_filename = "test.csv"
-base_name = "enter pickle name without extension"
+base_name = "test"
 
 if not os.path.exists("{}/{}".format(cwd, csv_filename)):
     raise FileNotFoundError("The csv file isn't in the current working directory")
@@ -47,7 +47,7 @@ else:
 
 # Use the pre-trained Google News model
 
-model = gensim.models.Word2Vec.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
+model = gensim.models.KeyedVectors.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
 
 
 # TODO : add possibility to train your own model on a corpus, but specify the type of the corpus
@@ -101,3 +101,4 @@ def find_closest(target_key):
             max_similarity = similarity
             closest_key = key
     return max_similarity, closest_key
+
