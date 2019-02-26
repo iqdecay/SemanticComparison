@@ -5,7 +5,6 @@ import document_io
 import os
 import gensim
 
-
 # TODO : have the program ask for input
 #  The csv file contains texts separated by commas
 csv_filename = "enter filename with .csv"
@@ -16,7 +15,8 @@ pickle_name = base_name + ".pkl"
 
 # If the pickle file exists, then go directly to treatment
 cwd = os.getcwd()
-if not os.path.exists("{}/{}".format(cwd, pickle_name)):
+complete_path = "{}/{}".format(cwd, pickle_name)
+if not os.path.exists(complete_path):
     print("Pickle not found under {}, treating the csv".format(complete_path))
     csv_path = "{}/{}".format(cwd, csv_filename)
     file_dictionary = csv.open_csv(csv_path)
