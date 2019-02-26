@@ -9,36 +9,21 @@ def load_model(model_name):
     return gensim.models.Word2Vec.load(model_name)
 
 
-def sentence_to_vect(sentence, w2v_model):
+def sentence_to_vector(sentence, w2v_model):
     """
     Transform the sentence into a normalized vector by linear addition of its composing word vectors
     :param sentence: tokenized sentence, as word list
     :param w2v_model: word2vec model, already trained
-    :return: the corresponding vector, and wether or not it is null
+    :return: the corresponding vector
     """
-    vector_length = len(w2v_model['ximi'])  # We use ximi because we know it's in the model's vocabulary
+    vector_length = 300  #  The Google W2V model has 300 dimensions
     sentence_vector = np.array([0 for _ in range(vector_length)])
     for word in sentence:
         try:
             sentence_vector = np.add(sentence_vector, np.array(w2v_model[word]))
         except KeyError:
             pass  # It just means the word isn't in the model
-    norm_vector = np.linalg.norm(sentence_vector)
-    if norm_vector != 0:
-        sentence_vector = sentence_vector / norm_vector
-        has_null_vector = False
-    else:
-        has_null_vector = True
-    return sentence_vector, has_null_vector
-
-
-def transform_ticket(ticket, model):
-    """"Transform the ticket into a vector, add the vector to the ticket and return the ticket"""
-    body = ticket['body']
-    sentence = list(body)  # One will notice that at no point is the subject taken into account
-    vectorized, has_null_vector = sentence_to_vect(sentence, model)
-    ticket['vector'] = vectorized
-    return ticket, has_null_vector
+    return sentence_vector
 
 
 def save_to_memory(key_list, value_list, filename, w2v_model):
