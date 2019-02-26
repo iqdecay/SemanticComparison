@@ -59,11 +59,31 @@ def sentence_to_vector(sentence):
     :param sentence: tokenized sentence, as word list
     :return: the corresponding vector
     """
+    global model
     vector_length = 300  #  The Google W2V model has 300 dimensions
     sentence_vector = np.array([0 for _ in range(vector_length)])
     for word in sentence:
         try:
-            sentence_vector = np.add(sentence_vector, np.array(w2v_model[word]))
+            sentence_vector = np.add(sentence_vector, np.array(model[word]))
         except KeyError:
             pass  # It just means the word isn't in the model
     return sentence_vector
+
+
+vectorized_text_pickle_name = base_name + "vectorized_text" + ".pkl"
+
+vectorized_texts = dict()
+
+# Vectorize every sentence
+for key, tokenized_sentence in treated_dictionary.items() :
+    vectorized_sentence = sentence_to_vector(tokenized_sentence)
+    vectorized_texts[key] = vectorized_sentence
+
+# Save the result
+document_io.save(vectorized_text_pickle_name, vectorized_texts, cwd)
+
+
+
+
+
+
