@@ -7,15 +7,18 @@ import gensim
 import text_similarity
 
 # TODO : have the program ask for input
+cwd = os.getcwd()
 #  The csv file contains texts separated by commas
 csv_filename = "enter filename with .csv"
 base_name = "enter pickle name without extension"
+
+if not os.path.exists("{}/{}".format(cwd, csv_filename)):
+    raise FileNotFoundError("The csv file isn't in the current working directory")
 
 # From the base name, initialize all of the filenames
 pickle_name = base_name + ".pkl"
 
 # If the pickle file exists, then go directly to treatment
-cwd = os.getcwd()
 complete_path = "{}/{}".format(cwd, pickle_name)
 if not os.path.exists(complete_path):
     print("Pickle not found under {}, treating the csv".format(complete_path))
