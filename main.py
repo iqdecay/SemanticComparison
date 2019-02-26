@@ -4,7 +4,7 @@ import text_processing
 import document_io
 import os
 import gensim
-import document_similarity
+import text_similarity
 
 # TODO : have the program ask for input
 #  The csv file contains texts separated by commas
@@ -93,7 +93,7 @@ def find_closest(target_key):
     max_similarity = -1
     closest_key = target_key
     for key, sentence_vector in vectorized_texts.items():
-        similarity = document_similarity.text_distance(target_vector, sentence_vector)
+        similarity = text_similarity.text_distance(target_vector, sentence_vector)
         if similarity >= max_similarity and key != target_key:
             max_similarity = similarity
             closest_key = key
