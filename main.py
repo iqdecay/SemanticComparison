@@ -33,14 +33,12 @@ else:
 
 # TODO : handle the choice of language, defaulting to english for now
 
-# If the treated text exists, do not run the treatment again
 treated_dictionary_pickle_name = base_name + "_treated_dict" + ".pkl"
 
+# If the treated text exists, do not run the treatment again
 if not os.path.exists("{}/{}".format(cwd, treated_dictionary_pickle_name)):
     #  Specify the parameters, cf text_processing.py for explanation
-    treated_dictionary = text_processing.treat_dictionary(file_dictionary, number_of_texts=1000000, min_len=1,
-                                                          max_len=15
-                                                          )
+    treated_dictionary = text_processing.treat_dictionary(file_dictionary, min_len=1, max_len=15)
     document_io.save(treated_dictionary_pickle_name, treated_dictionary, cwd)
     print("The text was treated and saved under {}{}".format(cwd, treated_dictionary_pickle_name))
 else:
