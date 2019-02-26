@@ -4,6 +4,7 @@ import text_processing
 import document_io
 import os
 import gensim
+import document_similarity
 
 # TODO : have the program ask for input
 #  The csv file contains texts separated by commas
@@ -79,4 +80,21 @@ for key, tokenized_sentence in treated_dictionary.items():
 document_io.save(vectorized_text_pickle_name, vectorized_texts, cwd)
 
 
-
+def find_closest(target_key):
+    """
+    Find the most similar ticket using dot product of two sentence vectors
+    :param target_key: key of the sentence we want to find the "most similar" sentence for
+    :return:
+    max_similarity : biggest similarity found
+    closest_key : the key of closest sentence
+    """
+    global vectorized_texts
+    target_vector = vectorized_texts[target_key]
+    max_similarity = -1
+    closest_key = target_key
+    for key, sentence_vector in vectorized_texts.items():
+        similarity = document_similarity.text_distance(target_vector, sentence_vector)
+        if similarity >= max_similarity and key != target_key:
+            max_similarity = similarity
+            closest_key = key
+    return max_similarity, closest_key
