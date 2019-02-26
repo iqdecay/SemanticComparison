@@ -50,7 +50,6 @@ def treat_dictionary(dictionary, min_len=2, max_len=15, lang="english"):
     """
     Open the dictionary, return a corpus of treated text from it
     :param dictionary: the dictionary which contains the texts
-    :param number_of_texts: the number of texts that will be processed, can be limited for testing purposes
     :param min_len: the minimum length of a token to be considered a word
     :param max_len: the maximum length of a token to be considered a word
     :param lang: the language for stopwords
