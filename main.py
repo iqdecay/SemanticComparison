@@ -1,13 +1,17 @@
 import csv_to_pickle as csv
-import text_processing, document_io
-import os, gensim
+import numpy as np
+import text_processing
+import document_io
+import os
+import gensim
+
 
 # TODO : have the program ask for input
-#  The csv file contains texts separate by commas
+#  The csv file contains texts separated by commas
 csv_filename = "enter filename with .csv"
 base_name = "enter pickle name without extension"
 
-# From the pickle name, initialize all of the filenames
+# From the base name, initialize all of the filenames
 pickle_name = base_name + ".pkl"
 
 # If the pickle file exists, then go directly to treatment
