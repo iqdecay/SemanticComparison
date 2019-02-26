@@ -25,11 +25,7 @@ else:
     print("Pickle found, not treating the CSV")
     file_dictionary = document_io.load(pickle_name)
 
-""" Process text : 
- - tokenization
- - remove long and short words
- - remove punctuation and numbers
-"""
+number_of_texts = len(file_dictionary)
 
 # TODO : handle the choice of language, defaulting to english for now
 
@@ -75,15 +71,12 @@ vectorized_text_pickle_name = base_name + "vectorized_text" + ".pkl"
 vectorized_texts = dict()
 
 # Vectorize every sentence
-for key, tokenized_sentence in treated_dictionary.items() :
+for key, tokenized_sentence in treated_dictionary.items():
     vectorized_sentence = sentence_to_vector(tokenized_sentence)
     vectorized_texts[key] = vectorized_sentence
 
 # Save the result
 document_io.save(vectorized_text_pickle_name, vectorized_texts, cwd)
-
-
-
 
 
 
