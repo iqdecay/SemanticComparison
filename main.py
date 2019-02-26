@@ -47,11 +47,25 @@ else:
     print("Treated text was found, not processing it")
     treated_dictionary = document_io.load(treated_dictionary_pickle_name)
 
-
 # Use the pre-trained Google News model
 
 model = gensim.models.Word2Vec.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
 
+
 # TODO : add possibility to train your own model on a corpus, but specify the type of the corpus
 
 
+def sentence_to_vector(sentence):
+    """
+    Transform the sentence into a normalized vector by linear addition of its composing word vectors
+    :param sentence: tokenized sentence, as word list
+    :return: the corresponding vector
+    """
+    vector_length = 300  #  The Google W2V model has 300 dimensions
+    sentence_vector = np.array([0 for _ in range(vector_length)])
+    for word in sentence:
+        try:
+            sentence_vector = np.add(sentence_vector, np.array(w2v_model[word]))
+        except KeyError:
+            pass  # It just means the word isn't in the model
+    return sentence_vector
